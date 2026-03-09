@@ -18,7 +18,7 @@ import Changeaddress from './Changeaddress';
 import Paymentpage from './Paymentpage';
 import AddAddressForm from './Address';
 import Profits from "./Profits";
-import LandingPage from './Landingpage';
+import LandingPage from './LandingPage';
 import Orders from './Orders';
 import Profile from './Profile';
 import OrdersPage from './OrdersPage';
