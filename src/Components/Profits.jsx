@@ -23,9 +23,9 @@ function Profits() {
   useEffect(() => {
     let url = "";
 
-    if (mode === "day") url = "http://127.0.0.1:8000/api/dayprofits/";
-    if (mode === "week") url = "http://127.0.0.1:8000/api/weekprofits/";
-    if (mode === "month") url = "http://127.0.0.1:8000/api/monthprofits/";
+    if (mode === "day") url = "https://fooddevbackend-production.up.railway.app/api/dayprofits/";
+    if (mode === "week") url = "https://fooddevbackend-production.up.railway.app/api/weekprofits/";
+    if (mode === "month") url = "https://fooddevbackend-production.up.railway.app/api/monthprofits/";
 
     axios
       .get(url, { headers: { Authorization: `Token ${token}` } })

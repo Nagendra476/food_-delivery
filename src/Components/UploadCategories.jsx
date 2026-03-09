@@ -40,7 +40,7 @@ const UploadCategories = () => {
     data.append("img", formData.img);
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/categories/", data, {
+      const response = await axios.post("https://fooddevbackend-production.up.railway.app/api/categories/", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -26,7 +26,7 @@ function Piechart({ selectedDay, filterType }) {
 
     setLoading(true);
 
-    const apiURL = `http://127.0.0.1:8000/api/orders-by-${finalFilter}/${selectedDay}/`;
+    const apiURL = `https://fooddevbackend-production.up.railway.app/api/orders-by-${finalFilter}/${selectedDay}/`;
 
     console.log("API URL Called:", apiURL);
 

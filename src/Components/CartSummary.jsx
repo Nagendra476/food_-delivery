@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Backcomp from "./Backcomp";  
 function CartSummary() {
-  const url = "http://127.0.0.1:8000/api/viewcart/";
+  const url = "https://fooddevbackend-production.up.railway.app/api/viewcart/";
   const token = localStorage.getItem("token");
 
   const [cart, setCart] = useState([]);
@@ -34,7 +34,7 @@ function CartSummary() {
     if (newQty < 1) return;
     axios
       .put(
-        `http://127.0.0.1:8000/api/updatecart/${item.id}/`,
+        `https://fooddevbackend-production.up.railway.app/api/updatecart/${item.id}/`,
         { quantity: newQty },
         { headers: { Authorization: `Token ${token}` } }
       )
@@ -56,7 +56,7 @@ function CartSummary() {
 
 const removeItem = (item) => {
   axios
-    .delete(`http://127.0.0.1:8000/api/deletecart/${item.id}/`, {
+    .delete(`https://fooddevbackend-production.up.railway.app/api/deletecart/${item.id}/`, {
       headers: { Authorization: `Token ${token}` },
     })
     .then(() => {

@@ -23,7 +23,7 @@ export default function Paymentpage() {
     }
     // Fetch user's default address
     const token = localStorage.getItem("token");
-    fetch("http://127.0.0.1:8000/api/get_addresses/", {
+    fetch("https://fooddevbackend-production.up.railway.app/api/get_addresses/", {
       headers: { Authorization: `Token ${token}` },
     })
       .then((res) => res.json())
@@ -37,7 +37,7 @@ export default function Paymentpage() {
      setLoading(true);
 
   const token = localStorage.getItem("token");
-  const geturl = "http://127.0.0.1:8000/api/Order/"; 
+  const geturl = "https://fooddevbackend-production.up.railway.app/api/Order/"; 
 
       axios.post(
         geturl,

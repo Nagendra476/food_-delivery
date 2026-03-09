@@ -39,7 +39,7 @@ export default function AddAddressForm() {
     setSuccess(false);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/address/", {
+      const response = await fetch("https://fooddevbackend-production.up.railway.app/api/address/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

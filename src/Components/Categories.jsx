@@ -12,7 +12,7 @@ const Categories = () => {
   const [quantities, setQuantities] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/categories/")
+    axios.get("https://fooddevbackend-production.up.railway.app/api/categories/")
       .then((res) => {
         setCategories(res.data);
        
@@ -41,7 +41,7 @@ const Categories = () => {
     setCart((prev) => [...prev, { ...item, qty }]);
     const userId = localStorage.getItem("userid");
     console.log(userId)
-        let posturl="http://127.0.0.1:8000/api/viewcart/";  //add the items to the table and check if the item is samee or not
+        let posturl="https://fooddevbackend-production.up.railway.app/api/viewcart/";  //add the items to the table and check if the item is samee or not
         axios.post(posturl,{
           "user":userId,
           "category":item.id,

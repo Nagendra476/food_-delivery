@@ -9,7 +9,7 @@ function AllOrders() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/allorders/")
+      .get("https://fooddevbackend-production.up.railway.app/api/allorders/")
       .then((res) => setOrders(res.data))
       .catch((err) => console.error("Error fetching orders:", err));
   }, []);

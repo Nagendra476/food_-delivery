@@ -16,7 +16,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/login/", {
+      const res = await axios.post("https://fooddevbackend-production.up.railway.app/api/login/", {
         email,
         password,
       });

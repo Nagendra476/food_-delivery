@@ -28,7 +28,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/register/", formData);
+      const res = await axios.post("https://fooddevbackend-production.up.railway.app/api/register/", formData);
       console.log(res.data);
       setMessage("🎉 Registration successful!");
       setTimeout(() => navigate("/login"), 2000); // redirect to login page
