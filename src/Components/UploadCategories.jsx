@@ -37,7 +37,7 @@ const UploadCategories = () => {
     const data = new FormData();
     data.append("name", formData.name);
     data.append("price", formData.price);
-    data.append("image", formData.img);
+    data.append("img", formData.img);
 
     try {
       const response = await axios.post("https://fooddevbackend-production.up.railway.app/api/categories/", data, {
