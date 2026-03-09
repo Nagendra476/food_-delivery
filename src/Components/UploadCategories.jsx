@@ -51,7 +51,7 @@ const UploadCategories = () => {
       setFormData({ name: "", price: "", img: null });
       setPreview(null);
     } catch (error) {
-      console.error("❌ Error uploading:", error);
+      console.error("❌ Error uploading:", error.response?.data);
       setMessage("❌ Failed to upload category!");
     } finally {
       setLoading(false);
