@@ -6,7 +6,7 @@ const UploadCategories = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
-    image: null,
+    img: null,
   });
 
   const [preview, setPreview] = useState(null);
@@ -24,7 +24,7 @@ const UploadCategories = () => {
     const file = e.target.files[0];
     setFormData({
       ...formData,
-      image: file,
+      img: file,
     });
     setPreview(URL.createObjectURL(file));
   };
@@ -37,7 +37,7 @@ const UploadCategories = () => {
     const data = new FormData();
     data.append("name", formData.name);
     data.append("price", formData.price);
-    data.append("image", formData.image);
+    data.append("image", formData.img);
 
     try {
       const response = await axios.post("https://fooddevbackend-production.up.railway.app/api/categories/", data, {
@@ -48,7 +48,7 @@ const UploadCategories = () => {
 
       console.log("✅ Uploaded:", response.data);
       setMessage("✅ Category added successfully!");
-      setFormData({ name: "", price: "", image: null });
+      setFormData({ name: "", price: "", img: null });
       setPreview(null);
     } catch (error) {
       console.error("❌ Error uploading:", error);
