@@ -32,7 +32,7 @@ const UploadCategories = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");img
+    setMessage("");
 
     const data = new FormData();
     data.append("name", formData.name);
