@@ -99,7 +99,7 @@ const Categories = () => {
 
             {/* ✅ FIXED IMAGE URL */}
             <img
-              src={`${BASE_URL}${cat.img}`}
+              src={cat.img}
               alt={cat.name}
               className="w-full h-40 object-cover"
             />
@@ -173,7 +173,7 @@ const Categories = () => {
       <Footer />
 
     </div>
-  );
+  );    
 };
 
 export default Categories;
