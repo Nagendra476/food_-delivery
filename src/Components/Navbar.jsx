@@ -219,7 +219,7 @@ const Navbar = () => {
 
   <div className="md:hidden bg-red-600 text-white px-4 py-5 space-y-4">
 
-```
+
 {/* Search */}
 <form
   onSubmit={handleSearch}
@@ -324,7 +324,7 @@ const Navbar = () => {
     </>
   )}
 </div>
-```
+
 
   </div>
 )}

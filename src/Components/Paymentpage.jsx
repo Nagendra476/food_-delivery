@@ -1,31 +1,35 @@
-
-
 import React, { useEffect, useState } from "react";
 import Changeaddress from "./Changeaddress";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Backcomp from "./Backcomp";
-import axios from "axios";  
+import axios from "axios";
+
 export default function Paymentpage() {
   const [address, setAddress] = useState(null);
-  const [selectedPayment, setSelectedPayment] = useState("upi1");
+  const [selectedPayment, setSelectedPayment] = useState("phonepe");
   const [loading, setLoading] = useState(false);
   const [showChangePage, setShowChangePage] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
-     const stored = localStorage.getItem("selectedAddress");
+    const stored = localStorage.getItem("selectedAddress");
+
     if (stored) {
       setAddress(JSON.parse(stored));
-      return; // don't fetch again if we already have one
+      return;
     }
-    // Fetch user's default address
+
     const token = localStorage.getItem("token");
-    fetch("https://fooddevbackend-production.up.railway.app/api/get_addresses/", {
-      headers: { Authorization: `Token ${token}` },
-    })
+
+    fetch(
+      "https://fooddevbackend-production.up.railway.app/api/get_addresses/",
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         const defaultAddress = data.find((a) => a.is_default) || data[0];
@@ -34,27 +38,33 @@ export default function Paymentpage() {
   }, []);
 
   const handleContinue = () => {
-     setLoading(true);
+    if (!address) {
+      alert("⚠ Please add delivery address before payment.");
+      return;
+    }
 
-  const token = localStorage.getItem("token");
-  const geturl = "https://fooddevbackend-production.up.railway.app/api/Order/"; 
+    setLoading(true);
 
-      axios.post(
-        geturl,
-        {},  
+    const token = localStorage.getItem("token");
+
+    axios
+      .post(
+        "https://fooddevbackend-production.up.railway.app/api/Order/",
+        { payment_method: selectedPayment },
         { headers: { Authorization: `Token ${token}` } }
       )
-      .then((res) => {
-          setShowSuccess(true);                // Show success message
-          setTimeout(() => { 
-            setShowSuccess(false);             // Hide after 3s 
-            navigate("/view");                 // Navigate 
-          }, 3000); 
-         }) 
-      .catch((err) => { 
-        alert("Payment failed! Order not placed."); 
-        console.log(err); 
-      }) 
+      .then(() => {
+        setShowSuccess(true);
+
+        setTimeout(() => {
+          setShowSuccess(false);
+          navigate("/view");
+        }, 3000);
+      })
+      .catch((err) => {
+        alert("Payment failed! Order not placed.");
+        console.log(err);
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -64,128 +74,140 @@ export default function Paymentpage() {
     setShowChangePage(true);
   };
 
-  const cancelpayment =()=>{
-    alert("Cancelling Payment")
-    navigate("/view")
-  }
-
-  //  callback from Changeaddress when user selects one
-  const handleSelectAddress = (selectedAddress) => {
-    setAddress(selectedAddress);
-    setShowChangePage(false); // close the Changeaddress page
-    console.log("Selected Address:", selectedAddress);
+  const cancelpayment = () => {
+    alert("Cancelling Payment");
+    navigate("/view");
   };
 
-  // If user clicked "Change delivery address", show that page
+  const handleSelectAddress = (selectedAddress) => {
+    setAddress(selectedAddress);
+    setShowChangePage(false);
+  };
+
   if (showChangePage) {
     return <Changeaddress onSelectAddress={handleSelectAddress} />;
   }
-  
+
+  const paymentMethods = [
+    { id: "phonepe", name: "PhonePe", color: "bg-purple-50" },
+    { id: "gpay", name: "Google Pay", color: "bg-blue-50" },
+    { id: "paytm", name: "Paytm", color: "bg-cyan-50" },
+    { id: "upi", name: "Any UPI App", color: "bg-green-50" },
+  ];
 
   return (
     <>
-    <div className="w-full">
-          <Navbar />
-    </div>
+      <Navbar />
 
-    <div className="absolute top-20 left-4 z-50">
-      <Backcomp />
-    </div>
-    <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-white flex justify-center p-4">
-      
-      <div className="w-full max-w-lg bg-white shadow-lg rounded-2xl border border-gray-200">
-       
-        <div className="p-4 border-b">
-          {address ? (
-            <>
-              <h2 className="text-lg font-semibold text-gray-800">
-                Delivering to {address.full_name}
-              </h2>
-              <p className="text-sm text-gray-600 mt-1">
-                {address.house_no}, {address.street},{address.phone_number}, {address.landmark && `${address.landmark}, `}
-                {address.city}, {address.state}, {address.pincode}, {address.country}
-              </p>
-              <button onClick={handleChangeAddress} className="text-indigo-600 text-sm mt-2 hover:underline">
-                Change delivery address
-              </button>
-            </>
-          ) : (
-            <>
-            <p>Please add a delivery address</p>
-            
-            <button onClick={handleChangeAddress} className="text-indigo-600 text-sm mt-2 hover:underline">
-                Change delivery address
-            </button>
-            </>
-          )}
-        </div>
+      <div className="absolute top-20 left-4 z-50">
+        <Backcomp />
+      </div>
 
-        
-        <div className="p-4">
-          <button
-            onClick={handleContinue}
-            className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2 rounded-lg transition"
-          >
-            {loading ? "Processing..." : "Continue"}
-          </button>
-        </div>
+      <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-white flex justify-center p-4">
+        <div className="w-full max-w-lg bg-white shadow-lg rounded-2xl border border-gray-200">
 
-        {/* Payment Section */}
-        <div className="border-t p-4">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">
-            Select a payment method
-          </h3>
+          {/* ADDRESS */}
+          <div className="p-4 border-b">
+            {address ? (
+              <>
+                <h2 className="text-lg font-semibold text-gray-800">
+                  Delivering to {address.full_name}
+                </h2>
 
-          <div className="space-y-3">
-            {[
-              { id: "upi1", name: "Amazon Pay UPI (Andhra Pragathi Grameena Bank **1234)" },
-              { id: "upi2", name: "Amazon Pay UPI (Canara Bank **1234)" },
-              { id: "phonepe", name: "PhonePe" },
-              { id: "gpay", name: "Google Pay" },
-              { id: "upi_any", name: "Pay by any UPI App" },
-            ].map((method) => (
-              <label
-                key={method.id}
-                className={`flex items-center border rounded-lg p-3 cursor-pointer ${
-                  selectedPayment === method.id ? "border-yellow-400 bg-yellow-50" : "border-gray-200"
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="payment"
-                  value={method.id}
-                  checked={selectedPayment === method.id}
-                  onChange={(e) => setSelectedPayment(e.target.value)}
-                  className="h-4 w-4 text-yellow-500 focus:ring-yellow-400"
-                />
-                <span className="ml-3 text-gray-700 text-sm">{method.name}</span>
-              </label>
-            ))}
+                <p className="text-sm text-gray-600 mt-1">
+                  {address.house_no}, {address.street}, {address.phone_number},{" "}
+                  {address.city}, {address.state}, {address.pincode}
+                </p>
+
+                <button
+                  onClick={handleChangeAddress}
+                  className="text-indigo-600 text-sm mt-2 hover:underline"
+                >
+                  Change delivery address
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="text-red-500">⚠ Please add delivery address</p>
+
+                <button
+                  onClick={handleChangeAddress}
+                  className="text-indigo-600 text-sm mt-2 hover:underline"
+                >
+                  Add Address
+                </button>
+              </>
+            )}
           </div>
 
-          <button className="mt-4 text-blue-600 text-sm hover:underline">
-            + Add account to Amazon Pay UPI
-          </button>
-          <button
-            onClick={cancelpayment}
-            className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2 rounded-lg transition"
-          >
-            {loading ? "Processing..." : "Cancel Payment"}
-          </button>
-        </div>
-      </div>
-    </div>
-        {showSuccess && (
-      <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
-        <div className="bg-white px-8 py-6 rounded-xl shadow-lg text-2xl font-semibold text-center animate-fade-in">
-          🎉 Order Placed Successfully! 🎉
-        </div>
-      </div>
-    )}
+          {/* PAYMENT METHODS */}
+          <div className="p-4">
+            <h3 className="text-lg font-semibold mb-3">
+              Select Payment Method
+            </h3>
 
+            <div className="space-y-3">
+
+              {paymentMethods.map((method) => (
+                <label
+                  key={method.id}
+                  className={`flex items-center justify-between border rounded-xl p-4 cursor-pointer transition ${
+                    selectedPayment === method.id
+                      ? "border-yellow-400 bg-yellow-50"
+                      : "border-gray-200"
+                  } ${method.color}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value={method.id}
+                      checked={selectedPayment === method.id}
+                      onChange={(e) => setSelectedPayment(e.target.value)}
+                    />
+
+                    <span className="font-medium text-gray-700">
+                      {method.name}
+                    </span>
+                  </div>
+
+                  <span className="text-sm text-gray-500">UPI</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* CONTINUE */}
+          <div className="p-4 space-y-3">
+            <button
+              disabled={!address}
+              onClick={handleContinue}
+              className={`w-full py-3 rounded-lg font-semibold transition ${
+                address
+                  ? "bg-yellow-400 hover:bg-yellow-500"
+                  : "bg-gray-300 cursor-not-allowed"
+              }`}
+            >
+              {loading ? "Processing..." : "Pay & Place Order"}
+            </button>
+
+            <button
+              onClick={cancelpayment}
+              className="w-full bg-gray-200 hover:bg-gray-300 py-2 rounded-lg"
+            >
+              Cancel Payment
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white px-8 py-6 rounded-xl shadow-lg text-2xl font-semibold text-center">
+            🎉 Order Placed Successfully! 🎉
+          </div>
+        </div>
+      )}
     </>
   );
 }
-
-
-

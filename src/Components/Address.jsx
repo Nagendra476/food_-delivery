@@ -105,7 +105,7 @@ export default function AddAddressForm() {
               name="full_name"
               value={formData.full_name}
               onChange={handleChange}
-              placeholder="Mahendra Reddy"
+              placeholder="Enter full name"
               required
               className="mt-1 w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
@@ -121,7 +121,7 @@ export default function AddAddressForm() {
               name="phone_number"
               value={formData.phone_number}
               onChange={handleChange}
-              placeholder="6303619658"
+              placeholder="Enter phone number"
               required
               className="mt-1 w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
@@ -136,7 +136,7 @@ export default function AddAddressForm() {
               name="house_no"
               value={formData.house_no}
               onChange={handleChange}
-              placeholder="12B"
+              placeholder="Enter house/flat number"
               required
               className="mt-1 w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
@@ -152,7 +152,7 @@ export default function AddAddressForm() {
               name="street"
               value={formData.street}
               onChange={handleChange}
-              placeholder="MG Road"
+              placeholder="Enter street name"
               className="mt-1 w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
           </div>
@@ -167,7 +167,7 @@ export default function AddAddressForm() {
               name="landmark"
               value={formData.landmark}
               onChange={handleChange}
-              placeholder="Near City Mall"
+              placeholder="Enter landmark (optional)"
               className="mt-1 w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
           </div>
@@ -182,7 +182,7 @@ export default function AddAddressForm() {
               name="city"
               value={formData.city}
               onChange={handleChange}
-              placeholder="Anantapur"
+              placeholder="Enter city"
               required
               className="mt-1 w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
@@ -198,7 +198,7 @@ export default function AddAddressForm() {
               name="state"
               value={formData.state}
               onChange={handleChange}
-              placeholder="Andhra Pradesh"
+              placeholder="Enter state"
               required
               className="mt-1 w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
@@ -214,7 +214,7 @@ export default function AddAddressForm() {
               name="pincode"
               value={formData.pincode}
               onChange={handleChange}
-              placeholder="560001"
+              placeholder="Enter pincode"
               required
               className="mt-1 w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
@@ -229,7 +229,7 @@ export default function AddAddressForm() {
               name="country"
               value={formData.country}
               onChange={handleChange}
-              placeholder="India"
+              placeholder="Enter country"
               required
               className="mt-1 w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
             />
