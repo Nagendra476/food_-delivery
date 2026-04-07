@@ -25,7 +25,7 @@ export default function Paymentpage() {
     const token = localStorage.getItem("token");
 
     fetch(
-      "https://fooddevbackend-production.up.railway.app/api/get_addresses/",
+      "https://food-dev-backend-ulvl.onrender.com/api/get_addresses/",
       {
         headers: { Authorization: `Token ${token}` },
       }
@@ -49,7 +49,7 @@ export default function Paymentpage() {
 
     axios
       .post(
-        "https://fooddevbackend-production.up.railway.app/api/Order/",
+        "https://food-dev-backend-ulvl.onrender.com/api/Order/",
         { payment_method: selectedPayment },
         { headers: { Authorization: `Token ${token}` } }
       )

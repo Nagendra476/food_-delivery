@@ -12,7 +12,7 @@ export default function Changeaddress({ onSelectAddress }) {
 
   useEffect(() => {
     let token=localStorage.getItem("token")
-    fetch("https://fooddevbackend-production.up.railway.app/api/get_addresses/", {
+    fetch("https://food-dev-backend-ulvl.onrender.com/api/get_addresses/", {
       headers: {
         Authorization: `Token ${token}`,
       },

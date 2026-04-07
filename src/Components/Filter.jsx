@@ -20,7 +20,7 @@ function Filter() {
     if (filters.price_min) params.price_min = filters.price_min;
     if (filters.price_max) params.price_max = filters.price_max;
 
-    const res = await axios.get("https://fooddevbackend-production.up.railway.app/api/products", {
+    const res = await axios.get("https://food-dev-backend-ulvl.onrender.com/api/products", {
       params: params
     });
 

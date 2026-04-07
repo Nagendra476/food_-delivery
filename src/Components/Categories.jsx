@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 
 const Categories = () => {
 
-  const BASE_URL = "https://fooddevbackend-production.up.railway.app";
+  const BASE_URL = "https://food-dev-backend-ulvl.onrender.com";
 
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
@@ -19,6 +19,7 @@ const Categories = () => {
     axios.get(`${BASE_URL}/api/categories/`)
       .then((res) => {
         setCategories(res.data);
+        
         setLoading(false);
       })
       .catch((err) => {
@@ -91,6 +92,7 @@ const Categories = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
         {categories.map((cat) => (
+          console.log(cat) || true &&
 
           <div
             key={cat.id}
@@ -98,11 +100,17 @@ const Categories = () => {
           >
 
             {/* ✅ FIXED IMAGE URL */}
+           
             <img
-              src={cat.img}
+              src={
+                cat.image
+                  ? `${BASE_URL}${cat.image}`
+                  : "https://via.placeholder.com/300"
+              }
               alt={cat.name}
               className="w-full h-40 object-cover"
             />
+            
 
             <div className="p-4 flex flex-col gap-2">
 

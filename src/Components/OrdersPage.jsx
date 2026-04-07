@@ -8,7 +8,7 @@ let token = localStorage.getItem("token");
 const [orders, setOrders] = useState([]);
   
   useEffect(() => {
-    axios.get("https://fooddevbackend-production.up.railway.app/api/Order/",{
+    axios.get("https://food-dev-backend-ulvl.onrender.com/api/Order/",{
       headers:{'Authorization':`Token ${token}`
       }
     })

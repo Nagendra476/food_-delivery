@@ -5,9 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Backcomp from "./Backcomp";  
 function CartSummary() {
-  const url = "https://fooddevbackend-production.up.railway.app/api/viewcart/";
+  const url = "https://food-dev-backend-ulvl.onrender.com/api/viewcart/";
   const token = localStorage.getItem("token");
-
   const [cart, setCart] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const navigate=useNavigate()
@@ -34,7 +33,7 @@ function CartSummary() {
     if (newQty < 1) return;
     axios
       .put(
-        `https://fooddevbackend-production.up.railway.app/api/updatecart/${item.id}/`,
+        `https://food-dev-backend-ulvl.onrender.com/api/updatecart/${item.id}/`,
         { quantity: newQty },
         { headers: { Authorization: `Token ${token}` } }
       )
@@ -56,7 +55,7 @@ function CartSummary() {
 
 const removeItem = (item) => {
   axios
-    .delete(`https://fooddevbackend-production.up.railway.app/api/deletecart/${item.id}/`, {
+    .delete(`https://food-dev-backend-ulvl.onrender.com/api/deletecart/${item.id}/`, {
       headers: { Authorization: `Token ${token}` },
     })
     .then(() => {

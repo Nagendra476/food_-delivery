@@ -56,7 +56,7 @@ const Navbar = () => {
 
     try {
       const response = await axios.get(
-        `https://fooddevbackend-production.up.railway.app/api/items/?search=${searchQuery}`
+        `https://food-dev-backend-ulvl.onrender.com/api/items/?search=${searchQuery}`
       );
       setResults(response.data);
     } catch (error) {

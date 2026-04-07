@@ -9,7 +9,7 @@ function AllOrders() {
 
   useEffect(() => {
     axios
-      .get("https://fooddevbackend-production.up.railway.app/api/allorders/")
+      .get("https://food-dev-backend-ulvl.onrender.com/api/allorders/")
       .then((res) => setOrders(res.data))
       .catch((err) => console.error("Error fetching orders:", err));
   }, []);

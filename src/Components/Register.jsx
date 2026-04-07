@@ -28,7 +28,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://fooddevbackend-production.up.railway.app/api/register/", formData);
+      const res = await axios.post("https://food-dev-backend-ulvl.onrender.com/api/register/", formData);
       console.log(res.data);
       setMessage("🎉 Registration successful!");
       setTimeout(() => navigate("/login"), 2000); // redirect to login page
@@ -126,7 +126,7 @@ const Register = () => {
         {message && (
           <p
             className={`text-center mt-4 font-semibold ${
-              message.includes("successfull") ? "text-green-700" : "text-red-600"
+              message.includes("successfull") ? "text-green-700" : "text-red-700"
             }`}
           >
             {message}

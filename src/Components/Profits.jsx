@@ -30,11 +30,11 @@ function Profits() {
     let url = "";
 
     if (mode === "day") {
-      url = "https://fooddevbackend-production.up.railway.app/api/dayprofits/";
+      url = "https://food-dev-backend-ulvl.onrender.com/api/dayprofits/";
     } else if (mode === "week") {
-      url = "https://fooddevbackend-production.up.railway.app/api/weekprofits/";
+      url = "https://food-dev-backend-ulvl.onrender.com/api/weekprofits/";
     } else if (mode === "month") {
-      url = "https://fooddevbackend-production.up.railway.app/api/monthprofits/";
+      url = "https://food-dev-backend-ulvl.onrender.com/api/monthprofits/";
     }
 
     axios
